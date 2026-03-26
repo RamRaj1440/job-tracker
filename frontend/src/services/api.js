@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: process.env.NODE_ENV === 'production'
-        ? 'https://job-tracker-backend-6sth.onrender.com/api'
-        : 'http://localhost:5000/api'
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 });
 
 // Automatically attach token to every request
