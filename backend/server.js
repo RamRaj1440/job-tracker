@@ -15,7 +15,9 @@ const allowedOrigins = ['http://localhost:5173', process.env.FRONTEND_URL].filte
 
 // Middleware
 app.use(cors({
-    origin: allowedOrigins,
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
 app.use(express.json());
