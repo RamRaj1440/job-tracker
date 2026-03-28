@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import AddJob from './pages/AddJob';
 import EditJob from './pages/EditJob';
 import AITools from './pages/AITools';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import { useAuth } from './context/AuthContext';
 
 
@@ -22,6 +24,8 @@ function App() {
         <Route path="/add-job" element={token ? <AddJob /> : <Navigate to="/login" />} />
         <Route path="/edit-job/:id" element={token ? <EditJob /> : <Navigate to="/login" />} />
         <Route path="/ai-tools" element={token ? <AITools /> : <Navigate to="/login" />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         {/* Add more routes here */}
       </Routes>
     </Router>

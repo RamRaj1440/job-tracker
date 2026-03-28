@@ -67,7 +67,7 @@ const Login = () => {
 
           {error && (
             <div style={styles.errorBox}>
-              <span>⚠️ {error}</span>
+              <span> {error}</span>
             </div>
           )}
 
@@ -112,7 +112,11 @@ const Login = () => {
                 </button>
               </div>
             </div>
-
+<div style={{ textAlign: 'right', marginTop: '-10px', marginBottom: '16px' }}>
+  <Link to="/forgot-password" style={{ fontSize: '13px', color: '#0A66C2', fontWeight: '600' }}>
+    Forgot password?
+  </Link>
+</div>
             <button
               type="submit"
               style={loading ? styles.btnDisabled : styles.btn}
