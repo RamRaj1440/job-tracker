@@ -156,7 +156,7 @@ const AITools = () => {
         </div>
 
         {/* Tool Selector Cards */}
-        <div style={styles.toolGrid}>
+        <div style={styles.toolGrid} className="ai-tool-grid">
           {TOOLS.map((tool) => (
             <button
               key={tool.id}
@@ -192,10 +192,10 @@ const AITools = () => {
         </div>
 
         {/* Main Content */}
-        <div style={styles.mainLayout}>
+        <div style={styles.mainLayout} className='ai-main-layout'>
 
           {/* Left — Input Form */}
-          <div style={styles.inputCard}>
+          <div style={styles.inputCard} className='ai-input-card'>
             <div style={styles.inputHeader}>
               <div style={{
                 ...styles.inputIconBox,

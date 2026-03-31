@@ -30,10 +30,10 @@ const Register = () => {
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} className='auth-page'>
 
       {/* Left Panel */}
-      <div style={styles.leftPanel}>
+      <div style={styles.leftPanel} className='left-panel'> 
         <div style={styles.leftContent}>
           <div style={styles.logoArea}>
             <MdWork size={36} color="#fff" />
@@ -59,7 +59,7 @@ const Register = () => {
       </div>
 
       {/* Right Panel */}
-      <div style={styles.rightPanel}>
+      <div style={styles.rightPanel} className='right-panel'>
         <div style={styles.formCard}>
           <h2 style={styles.formTitle}>Create your account</h2>
           <p style={styles.formSub}>Start tracking your job search for free</p>

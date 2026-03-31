@@ -108,7 +108,7 @@ const Analytics = () => {
         </div>
 
         {/* Top KPI Cards */}
-        <div style={styles.kpiGrid}>
+        <div style={styles.kpiGrid} className="kpi-grid">
           {[
             {
               icon: <BsBriefcaseFill size={20} />,
@@ -146,7 +146,7 @@ const Analytics = () => {
               subColor: weekChangePositive ? '#10B981' : '#EF4444',
             },
           ].map(kpi => (
-            <div key={kpi.label} style={styles.kpiCard}>
+            <div key={kpi.label} style={styles.kpiCard} className="kpi-card">
               <div style={styles.kpiTop}>
                 <div style={{
                   ...styles.kpiIcon,
@@ -171,10 +171,10 @@ const Analytics = () => {
         </div>
 
         {/* Charts Row */}
-        <div style={styles.chartsRow}>
+        <div style={styles.chartsRow} className='charts-row'>
 
           {/* Line Chart — 30 Day Trend */}
-          <div style={styles.chartCard}>
+          <div style={styles.chartCard} className="chart-card">
             <div style={styles.chartHeader}>
               <div>
                 <h3 style={styles.chartTitle}>Application Trend</h3>

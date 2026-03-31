@@ -81,7 +81,7 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Row */}
-        <div style={styles.statsRow}>
+        <div style={styles.statsRow} className="stats-row">
           <StatsCard
             title="Total Applied"
             count={stats.total}
@@ -109,7 +109,7 @@ const Dashboard = () => {
         </div>
 
         {/* Table Card */}
-        <div style={styles.tableCard}>
+        <div style={styles.tableCard} className="table-card">
 
           {/* Toolbar */}
           <div style={styles.toolbar}>
@@ -123,7 +123,7 @@ const Dashboard = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div style={styles.filterWrapper}>
+            <div style={styles.filterWrapper} className="filter-wrapper">
               <MdFilterList size={18} color="#64748B" />
               <select
                 style={styles.filterSelect}
@@ -142,11 +142,11 @@ const Dashboard = () => {
 
           {/* Table */}
           {loading ? (
-            <div style={styles.emptyState}>
+            <div style={styles.emptyState} className="loading-state">
               <p style={styles.emptyText}>Loading your applications...</p>
             </div>
           ) : jobs.length === 0 ? (
-            <div style={styles.emptyState}>
+            <div style={styles.emptyState} className="empty-state">
               <MdInbox size={48} color="#CBD5E1" />
               <p style={styles.emptyTitle}>No applications found</p>
               <p style={styles.emptyText}>
@@ -156,7 +156,7 @@ const Dashboard = () => {
               </p>
             </div>
           ) : (
-            <div style={styles.tableWrapper}>
+            <div style={styles.tableWrapper} className="table-wrapper">
               <table style={styles.table}>
                 <thead>
                   <tr>

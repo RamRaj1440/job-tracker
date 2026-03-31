@@ -257,7 +257,7 @@ const sendWeeklySummaryEmail = async (userEmail, userName, stats, topCompany) =>
   } catch (error) {
     console.error('Email error (weeklySummary):', error.message);
   }
-}; z
+};
 
 module.exports = {
   sendApplicationAddedEmail,

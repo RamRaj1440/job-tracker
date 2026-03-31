@@ -64,7 +64,7 @@ const AddJob = () => {
           Back to Dashboard
         </button>
 
-        <div style={styles.layout}>
+        <div style={styles.layout} className='form-layout'>
 
           {/* Left — Form */}
           <div style={styles.formCard}>
@@ -119,7 +119,7 @@ const AddJob = () => {
               </div>
 
               {/* Status + Date Row */}
-              <div style={styles.row}>
+              <div style={styles.row} className='form-row'>
                 <div style={styles.fieldGroup}>
                   <label style={styles.label}>
                     Application Status
@@ -222,7 +222,7 @@ const AddJob = () => {
           </div>
 
           {/* Right — Tips Panel */}
-          <div style={styles.tipsCard}>
+          <div style={styles.tipsCard} className='tips-card'>
             <h3 style={styles.tipsTitle}>💡 Pro Tips</h3>
             <div style={styles.tipsList}>
               {[

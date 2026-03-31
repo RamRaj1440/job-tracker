@@ -99,13 +99,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <section style={s.hero}>
+    <section style={s.hero} className='landing-hero'>
       {/* Background */}
       <div style={s.heroBg} />
       <div style={s.heroGrid} />
 
-      <div style={s.heroContent}>
-        <div style={s.heroBadge}>
+      <div style={s.heroContent} className='hero-content'>
+        <div style={s.heroBadge} className='hero-badge'>
           <BsRobot size={13} color="#0A66C2" />
           <span>AI-Powered Job Search Management</span>
         </div>
@@ -122,7 +122,7 @@ const Hero = () => {
           cover letters, prep you for interviews, and optimize your resume.
         </p>
 
-        <div style={s.heroCTAs}>
+        <div style={s.heroCTAs} className='hero-ctas'>
           <button style={s.heroPrimary} onClick={() => navigate('/register')}>
             Start Tracking Free
             <MdArrowForward size={18} />
@@ -152,9 +152,9 @@ const Hero = () => {
       </div>
 
       {/* Hero Visual — App Preview */}
-      <div style={s.heroVisual}>
-        <div style={s.appPreview}>
-          <div style={s.appPreviewBar}>
+      <div style={s.heroVisual} className='hero-visual'>
+        <div style={s.appPreview} className='app-preview'>
+          <div style={s.appPreviewBar} className='app-preview-bar'>
             <div style={s.appPreviewDots}>
               <span style={{ ...s.appDot, background: '#FF5F57' }} />
               <span style={{ ...s.appDot, background: '#FFBD2E' }} />
@@ -340,7 +340,7 @@ const HowItWorks = () => {
         <p style={s.sectionSubtitle}>
           Get started in under 2 minutes. No complicated setup.
         </p>
-        <div style={s.stepsGrid}>
+        <div style={s.stepsGrid} className='steps-grid'>
           {steps.map((step, i) => (
             <div key={step.num} style={s.stepCard}>
               <div style={s.stepTop}>
@@ -401,9 +401,9 @@ const AIToolsSection = () => {
         transform: visible ? 'translateY(0)' : 'translateY(30px)',
         transition: 'all 0.7s ease',
       }}>
-        <div style={s.aiHeader}>
+        <div style={s.aiHeader} className='ai-header'>
           <div>
-            <div style={s.aiBadge}>
+            <div style={s.aiBadge} className='ai-badge'>
               <MdAutoAwesome size={14} color="#F59E0B" />
               Powered by Groq Llama 3.3 70B
             </div>
@@ -477,7 +477,7 @@ const Testimonials = () => {
           Loved by job seekers
           <span style={s.titleBlue}> across India</span>
         </h2>
-        <div style={s.reviewsGrid}>
+        <div style={s.reviewsGrid} className='reviews-grid'>
           {reviews.map(review => (
             <div key={review.name} style={s.reviewCard}>
               <div style={s.reviewStars}>{'⭐'.repeat(5)}</div>
@@ -540,7 +540,7 @@ const CTASection = () => {
 const Footer = () => (
   <footer style={s.footer}>
     <div style={s.footerInner}>
-      <div style={s.footerTop}>
+      <div style={s.footerTop} className='footer-top'>
         <div style={s.footerBrand}>
           <div style={s.footerLogoRow}>
             <div style={s.navLogoIcon}><MdWork size={16} color="#fff" /></div>
@@ -550,7 +550,7 @@ const Footer = () => (
             AI-powered job search management for modern job seekers.
           </p>
         </div>
-        <div style={s.footerLinks}>
+        <div style={s.footerLinks} className='footer-links'>
           <div style={s.footerCol}>
             <p style={s.footerColTitle}>Product</p>
             <p style={s.footerLink}>Features</p>
