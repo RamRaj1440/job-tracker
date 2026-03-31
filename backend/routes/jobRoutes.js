@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const JobApplication = require('../models/JobApplication');
 const protect = require('../middleware/authMiddleware');
-
-// ✅ All routes below are protected — user must be logged in
+const User = require('../models/User');
+const { sendApplicationAddedEmail,
+    sendStatusChangedEmail, } = require('../utils/send Email');
+// All routes below are protected — user must be logged in
 
 // 1. CREATE — Add new job application
 // POST /api/jobs
@@ -20,6 +22,17 @@ router.post('/', protect, async (req, res) => {
             jobLink,
             notes
         });
+        const user = await User.findById(req.user._id);
+        if (user) {
+            sendApplicationAddedEmail(
+                user.email,
+                user.name,
+                company,
+                role,
+                status || 'Applied',
+                jobLink
+            );
+        }
 
         res.status(201).json(job);
     } catch (error) {
@@ -90,12 +103,27 @@ router.put('/:id', protect, async (req, res) => {
         if (job.user.toString() !== req.user._id.toString()) {
             return res.status(401).json({ message: 'Not authorized' });
         }
+        const oldStatus = job.status;
+
 
         const updatedJob = await JobApplication.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true }
         );
+        if (req.body.status && req.body.status !== oldStatus) {
+            const user = await User.findById(req.user._id);
+            if (user) {
+                sendStatusChangedEmail(
+                    user.email,
+                    user.name,
+                    updatedJob.company,
+                    updatedJob.role,
+                    oldStatus,
+                    req.body.status
+                );
+            }
+        }
 
         res.status(200).json(updatedJob);
     } catch (error) {
@@ -119,7 +147,7 @@ router.delete('/:id', protect, async (req, res) => {
         }
 
         await JobApplication.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: 'Job application deleted ✅' });
+        res.status(200).json({ message: 'Job application deleted ' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -239,6 +267,46 @@ router.get('/analytics/full', protect, async (req, res) => {
 
     } catch (error) {
         console.error('Analytics error:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// POST /api/jobs/weekly-summary
+// Call this manually or set up a cron job
+router.post('/weekly-summary', protect, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId);
+
+        // Get this week's stats
+        const thisWeekStart = new Date();
+        thisWeekStart.setDate(thisWeekStart.getDate() - 7);
+
+        const allJobs = await JobApplication.find({ user: userId });
+        const weekJobs = allJobs.filter(j =>
+            new Date(j.dateApplied) >= thisWeekStart
+        );
+
+        const stats = {
+            total: weekJobs.length,
+            interviews: weekJobs.filter(j => j.status === 'Interview').length,
+            offers: weekJobs.filter(j => j.status === 'Offered').length,
+            rejected: weekJobs.filter(j => j.status === 'Rejected').length,
+        };
+
+        // Get top company
+        const companyCounts = {};
+        weekJobs.forEach(job => {
+            companyCounts[job.company] = (companyCounts[job.company] || 0) + 1;
+        });
+        const topCompany = Object.entries(companyCounts)
+            .sort((a, b) => b[1] - a[1])[0]?.[0];
+
+        const { sendWeeklySummaryEmail } = require('../utils/sendEmail');
+        await sendWeeklySummaryEmail(user.email, user.name, stats, topCompany);
+
+        res.json({ message: 'Weekly summary sent! ✅' });
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });

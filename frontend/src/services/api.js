@@ -29,3 +29,4 @@ export const generateInterviewPrep = (data) => API.post('/ai/interview-prep', da
 export const generateFollowupEmail = (data) => API.post('/ai/followup-email', data);
 export const generateResumeTips = (data) => API.post('/ai/resume-tips', data);
 export const getAnalytics = () => API.get('/jobs/analytics/full');
+export const sendWeeklySummaryEmail = () => API.post('/jobs/analytics/send-summary');

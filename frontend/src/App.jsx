@@ -29,7 +29,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/analytics" element={token ? <Analytics /> : <Navigate to="/login" />} />
-        <
+        
         {/* Add more routes here */}
       </Routes>
     </Router>
