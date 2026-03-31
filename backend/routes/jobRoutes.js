@@ -142,4 +142,105 @@ router.get('/stats/summary', protect, async (req, res) => {
     }
 });
 
+// GET /api/jobs/analytics/full
+router.get('/analytics/full', protect, async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        // 1. All jobs for this user
+        const allJobs = await JobApplication.find({ user: userId });
+
+        // 2. Status breakdown
+        const statusBreakdown = {
+            Applied: 0,
+            'Written Test': 0,
+            Interview: 0,
+            Offered: 0,
+            Rejected: 0,
+        };
+        allJobs.forEach(job => {
+            if (statusBreakdown[job.status] !== undefined) {
+                statusBreakdown[job.status]++;
+            }
+        });
+
+        // 3. Last 30 days trend
+        const today = new Date();
+        const last30Days = [];
+        for (let i = 29; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            const dateStr = date.toISOString().split('T')[0];
+            const count = allJobs.filter(job => {
+                const jobDate = new Date(job.dateApplied)
+                    .toISOString().split('T')[0];
+                return jobDate === dateStr;
+            }).length;
+            last30Days.push({
+                date: date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
+                applications: count,
+            });
+        }
+
+        // 4. Response rate
+        const responded = allJobs.filter(job =>
+            ['Interview', 'Offered', 'Rejected', 'Written Test'].includes(job.status)
+        ).length;
+        const responseRate = allJobs.length > 0
+            ? Math.round((responded / allJobs.length) * 100)
+            : 0;
+
+        // 5. Offer rate
+        const offers = allJobs.filter(job => job.status === 'Offered').length;
+        const offerRate = allJobs.length > 0
+            ? Math.round((offers / allJobs.length) * 100)
+            : 0;
+
+        // 6. Top companies (most applied)
+        const companyCounts = {};
+        allJobs.forEach(job => {
+            companyCounts[job.company] = (companyCounts[job.company] || 0) + 1;
+        });
+        const topCompanies = Object.entries(companyCounts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([company, count]) => ({ company, count }));
+
+        // 7. This week vs last week
+        const thisWeekStart = new Date(today);
+        thisWeekStart.setDate(today.getDate() - today.getDay());
+        const lastWeekStart = new Date(thisWeekStart);
+        lastWeekStart.setDate(lastWeekStart.getDate() - 7);
+
+        const thisWeek = allJobs.filter(job =>
+            new Date(job.dateApplied) >= thisWeekStart
+        ).length;
+        const lastWeek = allJobs.filter(job =>
+            new Date(job.dateApplied) >= lastWeekStart &&
+            new Date(job.dateApplied) < thisWeekStart
+        ).length;
+
+        // 8. Active applications (not rejected)
+        const active = allJobs.filter(job =>
+            !['Rejected'].includes(job.status)
+        ).length;
+
+        res.json({
+            total: allJobs.length,
+            active,
+            responseRate,
+            offerRate,
+            statusBreakdown,
+            last30Days,
+            topCompanies,
+            thisWeek,
+            lastWeek,
+        });
+
+    } catch (error) {
+        console.error('Analytics error:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router;

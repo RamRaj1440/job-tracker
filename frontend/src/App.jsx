@@ -8,6 +8,7 @@ import EditJob from './pages/EditJob';
 import AITools from './pages/AITools';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Analytics from './pages/Analytics';
 import { useAuth } from './context/AuthContext';
 
 
@@ -27,6 +28,8 @@ function App() {
         <Route path="/ai-tools" element={token ? <AITools /> : <Navigate to="/login" />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/analytics" element={token ? <Analytics /> : <Navigate to="/login" />} />
+        <
         {/* Add more routes here */}
       </Routes>
     </Router>

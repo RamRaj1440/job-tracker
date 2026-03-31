@@ -28,3 +28,4 @@ export const generateCoverLetter = (data) => API.post('/ai/cover-letter', data);
 export const generateInterviewPrep = (data) => API.post('/ai/interview-prep', data);
 export const generateFollowupEmail = (data) => API.post('/ai/followup-email', data);
 export const generateResumeTips = (data) => API.post('/ai/resume-tips', data);
+export const getAnalytics = () => API.get('/jobs/analytics/full');

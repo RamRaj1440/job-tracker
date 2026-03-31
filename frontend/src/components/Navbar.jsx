@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { MdWork, MdLogout, MdAdd,MdAutoAwesome } from 'react-icons/md';
+import { MdWork, MdLogout, MdAdd,MdAutoAwesome, MdBarChart} from 'react-icons/md';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -34,6 +34,11 @@ const Navbar = () => {
             <MdAdd size={18} />
             Add Application
           </button>
+  {/* Analytics Button */}
+          <button style={styles.analyticsBtn} onClick={() => navigate('/analytics')}>
+  <MdBarChart size={16} />
+  Analytics
+</button>
           {/* AI Tools Button */}
 <button style={styles.aiBtn} onClick={() => navigate('/ai-tools')}>
   <MdAutoAwesome size={16} />
@@ -114,6 +119,16 @@ const styles = {
     fontWeight: '600',
     cursor: 'pointer',
   },
+  analyticsBtn: {
+  display: 'flex', alignItems: 'center', gap: '6px',
+  padding: '8px 16px',
+  backgroundColor: '#F0FDF4',
+  color: '#059669',
+  border: '1px solid #A7F3D0',
+  borderRadius: '8px',
+  fontSize: '14px', fontWeight: '600', cursor: 'pointer',
+},
+  
   aiBtn: {
   display: 'flex', alignItems: 'center', gap: '6px',
   padding: '8px 16px',
