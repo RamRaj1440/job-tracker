@@ -24,7 +24,7 @@ const applicationAddedTemplate = (userName, company, role, status, jobLink) => `
     <!-- Body -->
     <div style="padding: 32px;">
       <h2 style="color: #1a1a2e; font-size: 22px; margin: 0 0 8px;">
-        Application Tracked! ✅
+        Application Tracked! 
       </h2>
       <p style="color: #555; font-size: 15px; line-height: 1.6; margin: 0 0 24px;">
         Hi ${userName}, your application has been added to your tracker.
@@ -89,7 +89,7 @@ const statusChangedTemplate = (userName, company, role, oldStatus, newStatus) =>
   const statusMessages = {
     'Written Test': `Great progress! Prepare well for the written test at ${company}.`,
     Interview: `Exciting news! You have an interview with ${company}. Use our AI Interview Prep tool to get ready!`,
-    Offered: `🎉 Congratulations! You received an offer from ${company}! You're one step closer to your dream job!`,
+    Offered: ` Congratulations! You received an offer from ${company}! You're one step closer to your dream job!`,
     Rejected: `Don't give up! Every rejection is a step closer to the right opportunity. Keep applying!`,
     Applied: `Application status updated to Applied for ${company}.`,
   };
@@ -193,8 +193,8 @@ const weeklySummaryTemplate = (userName, stats, topCompany) => `
 
       <p style="color: #555; font-size: 14px; line-height: 1.6; margin: 0 0 24px;">
         ${stats.total >= 5
-    ? `🎉 Great week! You hit your goal of 5+ applications. Keep the momentum going!`
-    : `💪 You need ${5 - stats.total} more application${5 - stats.total !== 1 ? 's' : ''} to hit your weekly goal of 5. You've got this!`
+    ? ` Great week! You hit your goal of 5+ applications. Keep the momentum going!`
+    : ` You need ${5 - stats.total} more application${5 - stats.total !== 1 ? 's' : ''} to hit your weekly goal of 5. You've got this!`
   }
       </p>
 

@@ -305,7 +305,7 @@ router.post('/weekly-summary', protect, async (req, res) => {
         const { sendWeeklySummaryEmail } = require('../utils/sendEmail');
         await sendWeeklySummaryEmail(user.email, user.name, stats, topCompany);
 
-        res.json({ message: 'Weekly summary sent! ✅' });
+        res.json({ message: 'Weekly summary sent! ' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
