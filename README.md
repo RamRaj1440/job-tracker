@@ -6,7 +6,7 @@ Stack](https://img.shields.io/badge/Stack-MERN-blue)
 ## 🌐 Live Demo
 | Service | URL |
 |---|---|
-| **Frontend** | [job-tracker-frontend-ramraj1440.vercel.app](https://job-tracker-frontend-indol.vercel.app/) |
+| **Frontend** | [job-tracker-frontend-ramraj1440.vercel.app](https://ramraj-job-application-tracker.vercel.app/) |
 | **Backend API** | [job-tracker-backend-6sth.onrender.com](https://job-tracker-backend-6sth.onrender.com) |
 | **GitHub** | [github.com/RamRaj1440/job-tracker](https://github.com/RamRaj1440/job-tracker) |--
 ## 📸 Screenshots
